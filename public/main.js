@@ -1,10 +1,9 @@
 let n = 2
 nextPage.addEventListener('click', () => {//  请求下一页
     const request = new XMLHttpRequest()
-    console.log(n);
     request.open('GET', `/page${n}.json`)
     request.onreadystatechange = () => {
-        if (request.readyState === 4 && request.status === 200) {
+        if (request.readyState === 4 &&request.status < 300&& request.status >= 200) {
             const arr = JSON.parse(request.response)
             arr.forEach(item => {
                 const li = document.createElement('li')
@@ -12,6 +11,9 @@ nextPage.addEventListener('click', () => {//  请求下一页
                 page.appendChild(li)
             });
             n = n + 1
+            console.log('加载成功')
+        }else if(request.readyState === 4){
+            console.log('没有下一页了')
         }
     }
     request.send()
@@ -83,9 +85,10 @@ getJs.addEventListener('click', () => {
 getHtml.addEventListener('click', () => {
     const request = new XMLHttpRequest()
     request.open('GET', '/3.html')
-    request.onreadystatechange = () => {//  请求状态改变事件
+    request.onreadystatechange = (req,rep) => {//  请求状态改变事件
         if (request.readyState === 4) {//  请求状态等于4再执行
             if (request.status < 300) {//  判断回应的状态码
+                console.log(rep)
                 const newDiv = document.createElement('div')
                 newDiv.innerHTML = request.response
                 document.body.appendChild(newDiv)
