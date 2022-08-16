@@ -76,7 +76,19 @@ var server = http.createServer(function (request, response) {
         response.setHeader('Content-Type', 'text/css;charset=utf-8')
         response.write(fs.readFileSync('public/style.css'))
         response.end()
-    } else {
+    }else if (path === '/axios.js') {
+        response.statusCode = 200
+        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+        response.write(fs.readFileSync('public/axios.js'))
+        response.end()
+    }else if (path === '/axiosPOST') {
+        response.statusCode = 200
+        console.log('request',request)
+        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+        response.write('axiosPOST')
+        response.end()
+    }
+    else {
         response.statusCode = 404
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
         response.write(`404找不到页面了,老表\n`)
