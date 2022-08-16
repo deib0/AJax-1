@@ -18,7 +18,7 @@ http【超文本传输协议】，规定了请求报文的格式:请求行、请
 2. 写ajax发请求
 * readystate是xhr对象的属性
 
-* 发查询参数 '/index.html?username=deibo&userid=01'，
+* 发查询参数 '/index.html?username=deibo&userid=01'，发请求头的参数 xhr.open('POST',{param:{name:''}})
 
 * 发POST，请求体放到 xhr.send(请求体)
 
